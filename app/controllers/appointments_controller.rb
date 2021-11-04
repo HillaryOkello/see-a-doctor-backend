@@ -1,8 +1,7 @@
 class AppointmentsController < ApplicationController
-  # before_action :set_appointment, only: %i[show update destroy]
-  # before_action :authorize_request
+  before_action :set_appointment, only: %i[show update destroy]
   def index
-    @appointments = @current_user.appointments
+    @appointments = Appointment.all
 
     render json: @appointments
   end
@@ -41,6 +40,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.permit(:user_id, :doctor_id, :appointment_date)
+    params.require(:appointment).permit(:user_id, :doctor_id, :appointment_date)
   end
 end
