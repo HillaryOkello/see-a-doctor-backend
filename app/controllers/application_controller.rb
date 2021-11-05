@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-
   def login!
     session[:user_id] = @user.id
   end

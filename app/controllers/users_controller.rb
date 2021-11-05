@@ -1,7 +1,7 @@
 require 'digest'
+require 'user_helper'
 
 class UsersController < ApplicationController
-
   def create
     new_user = users_params
     @user = User.create(name: new_user[:name], password: new_user[:password])
@@ -14,42 +14,19 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-      if @user
-        render json: {
+    if @user
+      render json: {
         user: @user
       }
-      else
-        render json: {
+    else
+      render json: {
         status: 500,
         errors: ['user not found']
       }
-      end
+    end
   end
 
   def users_params
     params.permit(:name, :password)
-  end
-
-  def authenticate_user
-    token = request.headers['token']
-    begin
-      payload = JWT.decode(token, secret_key, false)
-      @user = User.find(JSON.parse(payload[0])['id'])
-    rescue JWT::DecodeError => e
-      render json: { error: e.message }, status: :unauthorized
-    rescue ActiveRecord::RecordNotFound => e
-      render json: { error: e.message }, status: :unauthorized
-    end
-  end
-
-  def encode_token
-    payload = { 'id' => @user[:id], 'created_at' => @user[:created_at] }
-    JWT.encode(payload.to_json, secret_key, 'none')
-  end
-
-  private
-
-  def secret_key
-    'Kiswahili@7!'
   end
 end
