@@ -232,6 +232,3 @@ DEPENDENCIES
   shoulda-matchers (~> 5.0)
   spring
   tzinfo-data
-
-BUNDLED WITH
-   2.1.2
