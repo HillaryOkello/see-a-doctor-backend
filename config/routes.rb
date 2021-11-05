@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   post '/login',    to: 'sessions#create'
   post '/logout',   to: 'sessions#destroy'
-  get '/logged_in', to: 'sessions#is_logged_in?'
+  get '/logged_in', to: 'sessions#logged_in?'
   resources :doctors, only: [:index, :show]
   resources :users, only: [:index, :create, :show] do
     resources :appointments

@@ -29,4 +29,15 @@ class UsersController < ApplicationController
   def users_params
     params.permit(:name, :password)
   end
+
+  def encode_token
+    payload = { 'id' => @user[:id], 'created_at' => @user[:created_at] }
+    JWT.encode(payload.to_json, secret_key, 'none')
+  end
+
+  private
+
+  def secret_key
+    'Kiswahili@7!'
+  end
 end
