@@ -14,7 +14,7 @@ RSpec.describe 'Doctors', type: :request do
           password: '123456'
         }
       }
-    headers = { 'Authorization': JSON.parse(response.body)['jwt'] }
+    headers = { Authorization: JSON.parse(response.body)['jwt'] }
     get '/doctors', headers: headers
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq('application/json; charset=utf-8')
