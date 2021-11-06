@@ -14,7 +14,7 @@
 - Gems used for testing: Capybara, Rspec-Rails, and Shoulda-matchers.
 
 ## Live Demo
-See live demo [here]()
+See live demo [here](https://see-a-doctor-frontend.herokuapp.com/)
 
 ## Description
 
